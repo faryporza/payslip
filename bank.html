@@ -1,0 +1,297 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #container {
+      text-align: center;
+      width: 90%;
+      /* Adjust this width as needed */
+      max-width: 400px;
+      /* Set a maximum width */
+      margin: auto;
+    }
+
+    #sample {
+      font-size: 18px;
+      color: #333;
+    }
+
+    /* Button styles */
+    #btnEmail,
+    #btnPass {
+      padding: 15px;
+      margin-top: 5px;
+      cursor: pointer;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    #btnEmail {
+      background-color: rgb(58, 107, 241);
+    }
+
+    #btnPass {
+      background-color: rgb(224, 100, 141);
+    }
+
+    #btnEmail:hover {
+      background-color: #0056b3;
+    }
+
+    #btnPass:hover {
+      background-color: #882137;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-top: 10px;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: calc(100% - 24px);
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    /* Media query for smaller screens */
+    @media screen and (max-width: 480px) {
+      #container {
+        width: 90%;
+        max-width: none;
+      }
+
+      #btnEmail,
+      #btnPass {
+        padding: 12px;
+        margin-top: 5px;
+        border-radius: 8px;
+      }
+    }
+/* Your CSS styles here */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 3% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      max-width: 60%;
+      text-align: center;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .modal-text {
+      margin-bottom: 20px;
+    }
+
+    /* Button styles */
+    button {
+      background-color: #72c7c7; /* Green */
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    button:hover {
+      background-color: #5aa8b3;
+    }
+
+    /* Responsive styles */
+    @media screen and (max-width: 600px) {
+      .modal-content {
+        padding: 10px;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div id="sample">
+      <h2>เลข บช.</h2>
+      <h3>กรุงไทย: <input type="email" id="textbox" value="123456789" style="width: 150px;" readonly></h3>
+      <h3>84 บาทท</h3>
+    </div>
+
+
+    <!-- Password button with its unique ID -->
+    <button id="btnPass" onclick="copyPass()" style="width: 100%;">คัดลอกเลข บช.</button>
+    <p id="copyPass" style="display: none; color: green;">คัดลอกเลข บช.แล้ว!</p>
+    <br /><br />
+
+
+
+
+
+
+    <!-- Display message for copied text -->
+
+
+<!--</div>
+
+     <div id="myModal" class="modal">
+        <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-text">
+        <h2>แจ้งเตือนเด้ออ!</h2>
+        <p>ห้ามดูใน TV เพราะจะทำให้ดูบ่ได้!!</p>
+      </div>
+      <iframe width="80%" height="415" src="https://www.youtube.com/embed/Dme5gBqc4oA?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <br><button id="okButton">OK</button>
+    </div> 
+  </div>-->
+
+  <script>
+    function copyEmail() {
+      /* Copy text into clipboard */
+      navigator.clipboard.writeText("ikanrealm@gmail.com").then(function () {
+        document.getElementById('textbox').value = 'ikanrealm@gmail.com';
+        showCopyMessage('copyEmail');
+      });
+    }
+
+    function copyPass() {
+      /* Copy text into clipboard */
+      navigator.clipboard.writeText("12345679").then(function () {
+        showCopyMessage('copyPass');
+      });
+    }
+
+    function myFunction() {
+      var x = document.getElementById("textpass");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+    // Function to display the message and hide after a short delay
+    function showCopyMessage(elementId) {
+      var messageElement = document.getElementById(elementId);
+      messageElement.style.display = 'block';
+      setTimeout(function () {
+        messageElement.style.display = 'none';
+      }, 1500); // 1500 milliseconds (1.5 seconds) delay before hiding
+    }
+  </script>
+
+  <script>
+  // Function to show modal with YouTube video
+  window.onload = function() {
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var okButton = document.getElementById("okButton");
+
+    modal.style.display = "block";
+
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    okButton.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  };
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script>
+    function copyEmail() {
+      navigator.clipboard.writeText("ikanrealm@gmail.com").then(function () {
+        document.getElementById('textbox').value = 'ikanrealm@gmail.com';
+        showCopyMessage('คัดลอก E-mail แล้ว!');
+      });
+    }
+
+    function copyPass() {
+      navigator.clipboard.writeText("123456789").then(function () {
+        showCopyMessage('คัดลอกเลข บช.แล้ว!');
+      });
+    }
+
+    function myFunction() {
+      var x = document.getElementById("textpass");
+      x.type = (x.type === "password") ? "text" : "password";
+    }
+
+    function showCopyMessage(message) {
+      Swal.fire({
+        title: message,
+        icon: 'success',
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+  </script>
+</body>
+
+</html>
